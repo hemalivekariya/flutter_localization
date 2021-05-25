@@ -15,6 +15,7 @@ class _HomePageState extends State<HomePage> {
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
   void _changeLanguage(Language language) async {
     Locale _locale = await setLocale(language.languageCode);
+    print("_locale--------set>${_locale}");
     MyApp.setLocale(context, _locale);
   }
 
@@ -43,25 +44,13 @@ class _HomePageState extends State<HomePage> {
                   .map<DropdownMenuItem<Language>>(
                     (e) => DropdownMenuItem<Language>(
                       value: e,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: <Widget>[
-                          Text(
-                            e.flag,
-                            style: TextStyle(fontSize: 30),
-                          ),
-                          Text(e.name)
-                        ],
-                      ),
+                      child:Text(e.name)
                     ),
                   )
                   .toList(),
             ),
           ),
         ],
-      ),
-      drawer: Drawer(
-        child: _drawerList(),
       ),
       body: Container(
         padding: EdgeInsets.all(20),
@@ -160,58 +149,4 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Container _drawerList() {
-    TextStyle _textStyle = TextStyle(
-      color: Colors.white,
-      fontSize: 24,
-    );
-    return Container(
-      color: Theme.of(context).primaryColor,
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: <Widget>[
-          DrawerHeader(
-            child: Container(
-              height: 100,
-              child: CircleAvatar(),
-            ),
-          ),
-          ListTile(
-            leading: Icon(
-              Icons.info,
-              color: Colors.white,
-              size: 30,
-            ),
-            title: Text(
-              getTranslated(context, 'about_us'),
-              style: _textStyle,
-            ),
-            onTap: () {
-              // To close the Drawer
-              Navigator.pop(context);
-              // Navigating to About Page
-              Navigator.pushNamed(context, aboutRoute);
-            },
-          ),
-          ListTile(
-            leading: Icon(
-              Icons.settings,
-              color: Colors.white,
-              size: 30,
-            ),
-            title: Text(
-              getTranslated(context, 'settings'),
-              style: _textStyle,
-            ),
-            onTap: () {
-              // To close the Drawer
-              Navigator.pop(context);
-              // Navigating to About Page
-              Navigator.pushNamed(context, settingsRoute);
-            },
-          ),
-        ],
-      ),
-    );
-  }
 }

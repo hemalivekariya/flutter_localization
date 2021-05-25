@@ -22,6 +22,7 @@ class DemoLocalization {
   }
 
   String translate(String key) {
+    print("_localizedValues-----> ${_localizedValues[key]}");
     return _localizedValues[key];
   }
 
@@ -36,7 +37,7 @@ class _DemoLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) {
-    return ['en', 'fa', 'ar', 'hi'].contains(locale.languageCode);
+    return ['en', 'hi'].contains(locale.languageCode);
   }
 
   @override
